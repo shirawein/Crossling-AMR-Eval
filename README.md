@@ -13,9 +13,15 @@ To run the XS2match code:
 
 cd xs2match
 
-./x_evaluation-fixed-s2match.sh ../output-amr ../reference-amr
+./x_evaluation-fixed-s2match.sh ../output-amr.txt ../reference-amr.txt
 
-# Running XSmatch with NMT/fast_align
+# Running XSmatch
+
+To run the XSmatch code:
+
+cd xsmatch
+
+python smatch_nmt.py -f output-amr.txt reference-amr.txt
 
 # Running XSemBleu
 
@@ -25,7 +31,7 @@ cd sembleu-master
 
 chmod a+x eval.sh
 
-./eval.sh output-amr reference-amr
+./eval.sh [output-amr].txt [reference-amr].txt
 
 We recommend having a single AMR in each file.
 
