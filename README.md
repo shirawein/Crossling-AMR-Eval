@@ -13,15 +13,13 @@ To run the XS2match code:
 
 cd xs2match
 
-./x_evaluation-fixed-s2match.sh ../output-amr.txt ../reference-amr.txt
+./x_evaluation-fixed-s2match.sh ../[output-amr].txt ../[reference-amr].txt
 
 # Running XSmatch
 
 To run the XSmatch code:
 
-cd xsmatch
-
-python smatch_nmt.py -f output-amr.txt reference-amr.txt
+python xsmatch.py -f [output-amr].txt [reference-amr].txt
 
 # Running XSemBleu
 
