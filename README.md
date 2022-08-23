@@ -7,9 +7,7 @@
 
 (3) Folder to run XSemBleu
 
-(4) Code to break up one large AMR file into individual AMR files
-
-(5) Our human judgments of similarity with sentences
+(4) Our human judgments of similarity with sentences
 
 # Running XS2match with Labse
 
