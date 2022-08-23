@@ -12,6 +12,12 @@
 # Running Smatch with NMT/fast_align
 
 # Running CrossSemBleu
+To run the CrossSemBleu code:
+cd sembleu-master
+chmod a+x eval.sh
+./eval.sh output-amr reference-amr
+
+We recommend having a single AMR in each file.
 
 # Running external scripts:
 Quick pointer on where to get Smatch results: https://github.com/snowblink14/smatch
