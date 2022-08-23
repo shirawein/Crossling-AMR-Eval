@@ -8,16 +8,23 @@
 (5) Our human judgments of similarity with sentences
 
 # Running XS2match with Labse
+
 To run the XS2match code:
+
 cd xs2match
+
 ./x_evaluation-fixed-s2match.sh ../output-amr ../reference-amr
 
 # Running XSmatch with NMT/fast_align
 
 # Running XSemBleu
+
 To run the XSemBleu code:
+
 cd sembleu-master
+
 chmod a+x eval.sh
+
 ./eval.sh output-amr reference-amr
 
 We recommend having a single AMR in each file.
