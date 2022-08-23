@@ -1,0 +1,1 @@
+(w / wait- :ARG1 (i / i ) :ARG1-of (l / long- )) 

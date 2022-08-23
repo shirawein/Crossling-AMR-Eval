@@ -1,0 +1,23 @@
+# ::id proxy_es.50 ::annotator 41
+(c23 / ver-01
+     :ARG0 (c20 / y
+                :op1 (c1 / person
+                         :name (c3 / name
+                                   :op1 "Bush")
+                         :ARG0-of (c0 / have-org-role-91
+                                      :ARG2 (c19 / presidente)))
+                :op2 (c7 / person
+                         :name (c6 / name
+                                   :op1 "Condoleezaza"
+                                   :op2 "Rice"
+                                   :ARG0-of (c5 / have-org-role-91
+                                                :ARG2 (c21 / secretaria
+                                                           :mod (c22 / estado))))))
+     :ARG1 (c12 / pacto)
+     :ARG2 (c13 / parte
+                :mod (c14 / importante)
+                :part-of (c15 / legado
+                              :mod (c16 / política
+                                        :mod (c17 / exterior)
+                                        :mod (c18 / administrar-01
+                                                  :mod c1)))))

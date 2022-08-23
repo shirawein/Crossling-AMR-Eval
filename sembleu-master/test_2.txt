@@ -1,0 +1,21 @@
+# ::id PROXY_LTW_ENG_20070930_0021.23 ::date 2013-08-01T11:39:44 ::snt-type body ::annotator SDL-AMR-09 ::preferred
+# ::snt President Bush and Secretary of State Condoleezza Rice view the Pact as an important part of the Bush administration's foreign policy legacy.
+# ::save-date Fri Jan 29, 2016 ::file PROXY_LTW_ENG_20070930_0021_23.txt
+(v / view-02
+      :ARG0 (a / and
+            :op1 (p / person :name (n / name :op1 "Bush")
+                  :ARG0-of (h2 / have-org-role-91
+                        :ARG2 (p5 / president)))
+            :op2 (p6 / person :name (n2 / name :op1 "Condoleezza" :op2 "Rice")
+                  :ARG0-of (h3 / have-org-role-91
+                        :ARG2 (s / secretary
+                              :topic (f2 / foreign)))))
+      :ARG1 (p2 / pact)
+      :ARG2 (p3 / part
+            :ARG1-of (i / important-01)
+            :part-of (l / legacy
+                        :mod (p4 / policy-01
+                              :ARG2 (f / foreign))
+                        :poss (g / government-organization
+                              :ARG0-of (a2 / administrate-01)
+                              :mod p))))
