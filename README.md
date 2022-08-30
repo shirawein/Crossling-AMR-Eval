@@ -49,5 +49,9 @@ SemBleu results: https://github.com/freesunshine0316/sembleu/blob/master/README.
 S2match: https://github.com/flipz357/amr-metric-suite
 
 
-# Trouble-shooting LaBSE
+# Troubleshooting LaBSE
 Occasionally an error arises after using the LaBSE script with Mac for a few days. In our experience this is because the downloaded model is saved in a temporary folder that isn't being properly accessed. This error can be resovled by deleting the temporary folder. Access the temporary folder by entering "open $TMPDIR" into the command line on your machine and deleting the folder starting with "Tfhub."
+
+# Contact
+
+For any questions or information you can contact Shira Wein at sw1158@georgetown.edu.
