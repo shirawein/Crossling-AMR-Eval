@@ -108,7 +108,7 @@ def convert_french_to_english(amr2):
     print("NEW AMR")
     print("Instances ", o_instance)
     print("Attributes ", o_attributes)
-    print("Relations " t_relation)
+    print("Relations ", t_relation)
     return (o_instance, o_attributes, t_relation)
 
 def remove_senses(amr_curr):
