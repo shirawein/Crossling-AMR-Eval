@@ -10,8 +10,6 @@ Shira Wein, Nathan Schneider (2022). Accounting for Language Effect in the Evalu
 
 (3) Folder to run XSemBleu
 
-(4) Our human judgments of similarity with sentences
-
 # Running XS2match with LaBSE
 
 Our XS2match code adpats the S2match code at https://github.com/flipz357/amr-metric-suite
