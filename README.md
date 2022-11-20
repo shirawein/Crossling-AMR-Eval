@@ -16,7 +16,7 @@ Our XS2match code adpats the S2match code at https://github.com/flipz357/amr-met
 
 To run the XS2match code:
 
-cd xs2match
+cd s2match
 
 ./x_evaluation-fixed-s2match.sh ../[output-amr].txt ../[reference-amr].txt
 
