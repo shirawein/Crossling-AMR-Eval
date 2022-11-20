@@ -3,7 +3,7 @@
 This is the code and data for the forthcoming paper:
 Shira Wein, Nathan Schneider (2022). Accounting for Language Effect in the Evaluation of Cross-lingual AMR Parsers. To appear in The Proceedings of the 29th International Conference on Computational Linguistics (COLING).
 
-You will need to have scipy (pip install scipy) installed.
+You will need to have scipy (pip install scipy) installed. You will also need to have tensorflow-hub instaleld (pip install "tensorflow>=2.0.0") and (pip install --upgrade tensorflow-hub).
 
 # Contents:
 (1) Folder to run XS2match
