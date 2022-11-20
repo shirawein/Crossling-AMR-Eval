@@ -3,7 +3,7 @@
 # Evaluation script. Run as: ./evaluation.sh <parsed_data> <gold_data>
 
 
-VECS="../vectors/cc.combined.300.txt"
+VECS="../vectors/combined_en_es.txt"
 SF="cosine"
 TAU="0.5"
 DIFFSENSE="0.5"
