@@ -3,6 +3,8 @@
 This is the code and data for the forthcoming paper:
 Shira Wein, Nathan Schneider (2022). Accounting for Language Effect in the Evaluation of Cross-lingual AMR Parsers. To appear in The Proceedings of the 29th International Conference on Computational Linguistics (COLING).
 
+You will need to have scipy (pip install scipy) installed.
+
 # Contents:
 (1) Folder to run XS2match
 
@@ -17,7 +19,7 @@ Our XS2match code adpats the S2match code at https://github.com/flipz357/amr-met
 To run the XS2match code:
 
 cd s2match
-
+chmod +x x_evaluation-fixed-s2match.sh
 ./x_evaluation-fixed-s2match.sh ../[output-amr].txt ../[reference-amr].txt
 
 # Running XSmatch
