@@ -51,6 +51,10 @@ You should have a single AMR in each file.
 # Troubleshooting LaBSE
 Occasionally an error arises after using the LaBSE script with Mac for a few days. In our experience this is because the downloaded model is saved in a temporary folder that isn't being properly accessed. This error can be resovled by deleting the temporary folder. Access the temporary folder by entering "open $TMPDIR" into the command line on your machine and deleting the folder starting with "Tfhub."
 
+# Tensorflow Warnings
+
+Note that when running this code you will likely see tensorflow import/rebuild warnings, which is fine and not indicative of an issue running the code.
+
 # Contact
 
 For any questions or information you can contact Shira Wein at sw1158@georgetown.edu.
