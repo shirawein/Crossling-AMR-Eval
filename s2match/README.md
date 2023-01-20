@@ -1,4 +1,4 @@
-# Evaluate AMR with Smatch (Semantic match) and S2match (Soft Semantic match, speak [estuːmætʃ]) for Python 2
+# Evaluate AMR with Smatch (Semantic match) and S2match (Soft Semantic match) for Python 2
 	
 ## Information 
 
