@@ -91,17 +91,17 @@ def get_amr_line(input_f):
             cur_amr.append(line.strip())
     return "".join(cur_amr)
 
-def load_vecs(fp):
-    dic={}
-    if not fp:
-        return dic
-    with open(fp, "r") as f:
-        for line in f:
-            ls = line.split()
-            word = ls[0]
-            vec = np.array([float(x) for x in ls[1:]])
-            dic[word] = vec
-    return dic
+# def load_vecs(fp):
+#     dic={}
+#     if not fp:
+#         return dic
+#     with open(fp, "r") as f:
+#         for line in f:
+#             ls = line.split()
+#             word = ls[0]
+#             vec = np.array([float(x) for x in ls[1:]])
+#             dic[word] = vec
+#     return dic
 
 
 def build_arg_parser():
@@ -166,7 +166,7 @@ def cityblock_sim(a, b):
 
 def get_best_match(instance1, attribute1, relation1,
                    instance2, attribute2, relation2,
-                   prefix1, prefix2, vectors, cutoff, diffsense, simfun, mwp):
+                   prefix1, prefix2, cutoff, diffsense, simfun, mwp):
     """
     Get the highest triple match number between two sets of triples via hill-climbing.
     Arguments:
@@ -188,7 +188,7 @@ def get_best_match(instance1, attribute1, relation1,
     # weight_dict is a dictionary that maps a pair of node
     (candidate_mappings, weight_dict) = compute_pool(instance1, attribute1, relation1,
                                                      instance2, attribute2, relation2,
-                                                     prefix1, prefix2, vectors, cutoff, diffsense, simfun, mwp)
+                                                     prefix1, prefix2, cutoff, diffsense, simfun, mwp)
 
     if verbose:
         log_helper.debug( "Candidate mappings:")
@@ -237,7 +237,7 @@ def normalization(embeds):
     norms = np.linalg.norm(embeds, 2, axis=1, keepdims=True)
     return embeds/norms
 
-def maybe_get_vec(word, vecs, mwp ="split"):
+def maybe_get_vec(word, mwp ="split"):
     #tf.enable_eager_execution()
 
     constant = tf.constant([word])
@@ -320,7 +320,7 @@ def maybe_get_vec(word, vecs, mwp ="split"):
     #             v = np.sum(np.array(l), axis=0)
     # return v
     
-def maybe_sim(a, b, vecs, cutoff=0.5, diffsense=0.5, simfun=cosine_sim, mwp ="split"):
+def maybe_sim(a, b, cutoff=0.5, diffsense=0.5, simfun=cosine_sim, mwp ="split"):
     
     # if identical, return 1
     if a == b:
@@ -351,13 +351,13 @@ def maybe_sim(a, b, vecs, cutoff=0.5, diffsense=0.5, simfun=cosine_sim, mwp ="sp
 
     # now we know now that two concepts are different and get their vectors
     if a_wo_sense:
-        a_vec = maybe_get_vec(a_wo_sense, vecs, "None")
+        a_vec = maybe_get_vec(a_wo_sense, "None")
     else:
-        a_vec = maybe_get_vec(a, vecs, mwp)
+        a_vec = maybe_get_vec(a, mwp)
     if b_wo_sense:
-        b_vec = maybe_get_vec(b_wo_sense, vecs, "None")
+        b_vec = maybe_get_vec(b_wo_sense, "None")
     else:
-        b_vec = maybe_get_vec(b, vecs, mwp)
+        b_vec = maybe_get_vec(b, mwp)
 
     # if there is no vector, return 0
     if a_vec is None or b_vec is None:
@@ -365,11 +365,11 @@ def maybe_sim(a, b, vecs, cutoff=0.5, diffsense=0.5, simfun=cosine_sim, mwp ="sp
 
     # if it's a pred, we add the vector for the morphological 3rd person extension
     if "-" in a and a_wo_sense:
-        v = maybe_get_vec(a_wo_sense+"s", vecs, mwp="None")
+        v = maybe_get_vec(a_wo_sense+"s", mwp="None")
         if v is not None:
             a_vec += v
     if "-" in b and b_wo_sense:
-        v = maybe_get_vec(b_wo_sense+"s", vecs, mwp="None")
+        v = maybe_get_vec(b_wo_sense+"s", mwp="None")
         if v is not None:
             b_vec += v
 
@@ -390,7 +390,7 @@ def maybe_sim(a, b, vecs, cutoff=0.5, diffsense=0.5, simfun=cosine_sim, mwp ="sp
     else:
         return 0.00
 
-def maybe_has_sim(a, b, sim_dict, vecs={}, cutoff=0.5, diffsense=0.5, simfun=cosine_sim, mwp="split"):
+def maybe_has_sim(a, b, sim_dict, cutoff=0.5, diffsense=0.5, simfun=cosine_sim, mwp="split"):
     #maybe we have the computed similarities already?
     if a+"_"+b in sim_dict: 
         return sim_dict[a+"_"+b] 
@@ -399,7 +399,7 @@ def maybe_has_sim(a, b, sim_dict, vecs={}, cutoff=0.5, diffsense=0.5, simfun=cos
         return sim_dict[b+"_"+a] 
     else:
         #compute similarity and save
-        s=maybe_sim(a, b, vecs, cutoff=cutoff, diffsense=diffsense, simfun=simfun, mwp="split")
+        s=maybe_sim(a, b, cutoff=cutoff, diffsense=diffsense, simfun=simfun, mwp="split")
         if verbose:
             log_helper.debug( "Similarity", a, b, s)
         sim_dict[a+"_"+b] = s
@@ -409,7 +409,7 @@ def maybe_has_sim(a, b, sim_dict, vecs={}, cutoff=0.5, diffsense=0.5, simfun=cos
 
 def compute_pool(instance1, attribute1, relation1,
                  instance2, attribute2, relation2,
-                 prefix1, prefix2, vectors,cutoff=0.5, diffsense=0.5, simfun=cosine_sim, mwp="split"):
+                 prefix1, prefix2, cutoff=0.5, diffsense=0.5, simfun=cosine_sim, mwp="split"):
     """
     compute all possible node mapping candidates and their weights (the graded triple matching number gain resulting from
     mapping one node in AMR 1 to another node in AMR2)
@@ -464,7 +464,7 @@ def compute_pool(instance1, attribute1, relation1,
             if instance1[i][0].lower() == instance2[j][0].lower():
                 value_1 = instance1[i][2].lower()
                 value_2 = instance2[j][2].lower()
-                similarity = maybe_has_sim(value_1, value_2, sim_dict,vecs=vectors, 
+                similarity = maybe_has_sim(value_1, value_2, sim_dict,
                                            cutoff=cutoff, diffsense=diffsense, 
                                            simfun=simfun, mwp=mwp)
                 # get node index by stripping the prefix
@@ -497,7 +497,7 @@ def compute_pool(instance1, attribute1, relation1,
             elif attribute1[i][0].lower() == attribute2[j][0].lower()  == "top":
                 value_1 = attribute1[i][2].lower()
                 value_2 = attribute2[j][2].lower()
-                similarity = maybe_has_sim(value_1, value_2, sim_dict, vecs=vectors, 
+                similarity = maybe_has_sim(value_1, value_2, sim_dict,
                                            cutoff=cutoff, diffsense=diffsense, simfun=simfun, mwp=mwp)
                 # get node index by stripping the prefix
                 node1_index = int(attribute1[i][1][len(prefix1):])
@@ -1005,7 +1005,7 @@ def main(arguments):
     # sentence number
     sent_num = 1
     # Read amr pairs from two files
-    vectors = load_vecs(arguments.vectors)
+    #vectors = load_vecs(arguments.vectors)
     simfun = get_sim_fun(arguments.similarityfunction)
     while True:
         cur_amr1 = get_amr_line(args.f[0])
@@ -1050,7 +1050,7 @@ def main(arguments):
             log_helper.debug( relation2)
         (best_mapping, best_match_num_soft) = get_best_match(instance1, attributes1, relation1,
                                                         instance2, attributes2, relation2,
-                                                        prefix1, prefix2,vectors,arguments.cutoff, 
+                                                        prefix1, prefix2,arguments.cutoff, 
                                                         arguments.diffsense, simfun, arguments.multi_token_concept_strategy)
         if verbose:
             log_helper.debug( "best match number", best_match_num_soft)
@@ -1143,7 +1143,7 @@ def compute_s2match_from_two_lists(list1, list2
     total_gold_num = 0
     # sentence number
     sent_num = 1
-    vectors = load_vecs(vectorpath)
+    #vectors = load_vecs(vectorpath)
     for l1, l2 in zip(list1,list2): 
         lst_amr1, dic_amr1 = l1
         lst_amr2, dic_amr2 = l2
@@ -1177,7 +1177,7 @@ def compute_s2match_from_two_lists(list1, list2
             log_helper.debug( relation2)
         (best_mapping, best_match_num_soft) = get_best_match(instance1, attributes1, relation1,
                                                         instance2, attributes2, relation2,
-                                                        prefix1, prefix2,vectors,cutoff, diffsense, simfun, mwp)
+                                                        prefix1, prefix2,cutoff, diffsense, simfun, mwp)
         if verbose:
             log_helper.debug( "best match number", best_match_num_soft)
             log_helper.debug( "best node mapping", best_mapping)
